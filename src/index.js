@@ -16,22 +16,36 @@ class TemperatureScale extends React.Component {
   render() {
     const temperature = this.state.temperature
     const scale = this.state.scale
-    const celsius = scale === 'f' ? (temperature - 32) * 5/9 : temperature;
-    const fahrenheit = scale === 'c' ? (temperature * 9/5) + 32 : temperature;
+    const celsius = scale === 'f' ? convert(temperature, toCelsius) : temperature;
+    const fahrenheit = scale === 'c' ? convert(temperature, toFahrenheit) : temperature;
     return(
       <div>
-        <fieldset>
-          <legend>Celsius Scale</legend>
-          <input value={celsius} onChange={this.handleCelsius} />
-        </fieldset>
-
-        <fieldset>
-          <legend>Fahrenheit Scale</legend>
-          <input value={fahrenheit} onChange={this.handleFahrenheit} />
-        </fieldset>
+        <LiftState scaleName="Celsius" value={celsius} func={this.handleCelsius} />
+        <LiftState scaleName="Fahrenheit" value={fahrenheit} func={this.handleFahrenheit} />
       </div>
     )
    }
+}
+
+function convert(temperature, convertFunction) {
+  return convertFunction(temperature)
+}
+function toCelsius(fahrenheit) {
+  return (fahrenheit - 32) * 5/9
+}
+function toFahrenheit(celsius) {
+  return (celsius * 9/5) + 32
+}
+
+class LiftState extends React.Component {
+  render() {
+    return(
+      <fieldset>
+        <legend>{this.props.scaleName} Scale</legend>
+        <input value={this.props.value} onChange={this.props.func} />
+      </fieldset>
+    )
+  }
 }
 
   ReactDOM.render(
