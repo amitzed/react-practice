@@ -1,40 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css';
 
-class Clock extends React.Component {
+class Increment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      date: new Date()
-    }
+    this.state = {counter: 0}
   }
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    )
-  }
-  componentDisUnmount() {
-    clearInterval(this.timerID);
-  }
-  tick() {
+
+  increment = (e) => {
+    e.preventDefault();
     this.setState({
-      date: new Date()
+      counter: this.state.counter + 1
     });
   }
 
-    render() {
-      return (
-        <div>
-          <h1>Hi Amit</h1>
-          <h2>It's {this.state.date.toLocaleTimeString()}</h2>
-        </div>
-      )
-    };
+  render() {
+    return <button onClick={this.increment}><em>Click Me</em> <br/> The Current Value Is: {this.state.counter}</button>
   }
-
+}
 
   ReactDOM.render(
-    <Clock />,
+    <Increment />,
       document.getElementById('root')
   );

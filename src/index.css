@@ -5,9 +5,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: dodgerblue;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  font-size: 30px;
+  margin: 100px 100px 0 100px;
+  height: auto;
+  width: auto;
+  cursor: pointer;
 }
