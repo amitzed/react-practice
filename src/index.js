@@ -2,25 +2,34 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css';
 
-class Increment extends React.Component {
+function Greeting(props) {
+  if(props.value) {
+    return <h1>This is ONE greeting</h1>
+  }
+    return <h1>This is the OTHER greeting</h1>
+}
+
+class Button extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {counter: 0}
+    this.state = {value: true}
   }
-
-  increment = (e) => {
-    e.preventDefault();
+  handleClick = () => {
     this.setState({
-      counter: this.state.counter + 1
+      value: !this.state.value
     });
   }
-
   render() {
-    return <button onClick={this.increment}><em>Click Me</em> <br/> The Current Value Is: {this.state.counter}</button>
+    return(
+      <div>
+        <button onClick={this.handleClick}>Change Greeting</button>
+        <Greeting value={this.state.value} />
+      </div>
+    )
   }
 }
 
   ReactDOM.render(
-    <Increment />,
+    <Button />,
       document.getElementById('root')
   );
